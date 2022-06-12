@@ -1,23 +1,35 @@
 import { list } from '../coomandsList/lsDir.js';
 import { up } from '../coomandsList/upDir.js';
+import { cd } from '../coomandsList/cdDir.js';
 
 export class commandsRepeater {
     constructor(username,path) {
         this.path = path;
-        this.start(username,path);
+        this.start(username);
     }
 
-    async start(username,path) {
+    async start(username) {
         try {
             process.stdin.on('data', async (data) => {
-                const str = data.toString().trim();
+
+                const props = data.toString().trim();
+                let command = props.split(' ')[0];
+                if (!command) {
+                    command = props;
+                }
                 let check = true;
-                switch (str) {
+                let new_path = '';
+
+                switch (command) {
                     case 'ls':
                         await list(this.path);
                         break;
                     case 'up':
-                        let new_path = await up(this.path);
+                        new_path = await up(this.path);
+                        await this.updatePath(new_path);
+                        break;
+                    case 'cd':
+                        new_path = await cd(props,this.path);
                         await this.updatePath(new_path);
                         break;
                     case '.exit':

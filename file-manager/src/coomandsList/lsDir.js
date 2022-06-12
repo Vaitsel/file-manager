@@ -11,6 +11,6 @@ export const list = async (path) => {
         });
         console.log(arr_files);
     } catch (error) {
-        throw Error('Operation failed');
+        console.log('Operation failed');
     }
 };
