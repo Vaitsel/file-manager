@@ -1,15 +1,12 @@
 import fs from 'fs';
+import { checkPath } from "../utils/checkPath.js";
 
 export const cd = async (props,path) => {
-    const path_to_directory = props.split(' ');
-    if (path_to_directory.length == 2) {
+    let dir = await checkPath(props,path);
+    if (dir) {
         try {
-            await fs.promises.stat(path + '\\' + path_to_directory[1]);
-            if (path.length < 4) {
-                return path + path_to_directory[1]; 
-            } else {
-                return path + '\\' + path_to_directory[1]; 
-            }
+            await fs.promises.stat(dir);
+            return dir;
         } catch (error) {
             console.log('Operation failed');
             return path

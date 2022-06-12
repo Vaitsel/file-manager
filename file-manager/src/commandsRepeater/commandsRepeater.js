@@ -1,6 +1,7 @@
 import { list } from '../coomandsList/lsDir.js';
 import { up } from '../coomandsList/upDir.js';
 import { cd } from '../coomandsList/cdDir.js';
+import { read } from '../coomandsList/readFile.js';
 
 export class commandsRepeater {
     constructor(username,path) {
@@ -31,6 +32,9 @@ export class commandsRepeater {
                     case 'cd':
                         new_path = await cd(props,this.path);
                         await this.updatePath(new_path);
+                        break;
+                    case 'cat':
+                        await read(props,this.path);
                         break;
                     case '.exit':
                         this.close(username)
