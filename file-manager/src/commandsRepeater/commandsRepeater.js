@@ -9,6 +9,7 @@ import { calculateHash } from '../coomandsList/calcHash.js';
 import { osInfo } from '../coomandsList/osInfo.js';
 import { compress } from '../coomandsList/compress.js';
 import { decompress } from '../coomandsList/decompress.js';
+import { copy } from '../coomandsList/copyFile.js';
 
 export class commandsRepeater {
     constructor(username,path) {
@@ -63,6 +64,12 @@ export class commandsRepeater {
                         break;
                     case 'decompress':
                         await decompress(props,this.path);
+                        break;
+                    case 'cp':
+                        await copy(props,this.path,false);
+                        break;
+                    case 'mv':
+                        await copy(props,this.path,true);
                         break;
                     case '.exit':
                         this.close(username)
