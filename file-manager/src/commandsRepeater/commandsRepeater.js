@@ -7,6 +7,8 @@ import { rename } from '../coomandsList/renameFile.js';
 import { remove } from '../coomandsList/deleteFile.js';
 import { calculateHash } from '../coomandsList/calcHash.js';
 import { osInfo } from '../coomandsList/osInfo.js';
+import { compress } from '../coomandsList/compress.js';
+import { decompress } from '../coomandsList/decompress.js';
 
 export class commandsRepeater {
     constructor(username,path) {
@@ -55,6 +57,12 @@ export class commandsRepeater {
                         break;
                     case 'os':
                         await osInfo(props);
+                        break;
+                    case 'compress':
+                        await compress(props,this.path);
+                        break;
+                    case 'decompress':
+                        await decompress(props,this.path);
                         break;
                     case '.exit':
                         this.close(username)
