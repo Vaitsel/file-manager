@@ -5,6 +5,7 @@ import { read } from '../coomandsList/readFile.js';
 import { create } from '../coomandsList/addFile.js';
 import { rename } from '../coomandsList/renameFile.js';
 import { remove } from '../coomandsList/deleteFile.js';
+import { calculateHash } from '../coomandsList/calcHash.js';
 
 export class commandsRepeater {
     constructor(username,path) {
@@ -47,6 +48,9 @@ export class commandsRepeater {
                         break;
                     case 'rm':
                         await remove(props,this.path);
+                        break;
+                    case 'hash':
+                        await calculateHash(props,this.path);
                         break;
                     case '.exit':
                         this.close(username)
