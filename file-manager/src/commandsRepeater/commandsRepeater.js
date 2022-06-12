@@ -4,6 +4,7 @@ import { cd } from '../coomandsList/cdDir.js';
 import { read } from '../coomandsList/readFile.js';
 import { create } from '../coomandsList/addFile.js';
 import { rename } from '../coomandsList/renameFile.js';
+import { remove } from '../coomandsList/deleteFile.js';
 
 export class commandsRepeater {
     constructor(username,path) {
@@ -43,6 +44,9 @@ export class commandsRepeater {
                         break;
                     case 'rn':
                         await rename(props,this.path);
+                        break;
+                    case 'rm':
+                        await remove(props,this.path);
                         break;
                     case '.exit':
                         this.close(username)
